@@ -1,0 +1,1 @@
+Situation {n}: pay ${cost} to reduce Person A's payoff by ${damage}.

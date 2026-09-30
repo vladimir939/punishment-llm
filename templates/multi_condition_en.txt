@@ -1,0 +1,19 @@
+{persona_block}SITUATION:
+Two people took part in a task. Person A was given $100 and had to divide it
+between themselves and Person B. Person B had no say in the decision.
+Person A chose to keep $80 and give $20 to Person B.
+
+You are Person B. Separately from this division, you have $50 of your own.
+
+DECISION:
+Consider each of the following four situations independently.
+In each one, choose whether to do nothing or to pay.
+
+{situation_lines}
+
+Answer in exactly this format and include nothing else:
+SITUATION 1: [PAY or NOTHING]
+SITUATION 2: [PAY or NOTHING]
+SITUATION 3: [PAY or NOTHING]
+SITUATION 4: [PAY or NOTHING]
+REASON: [one or two sentences]

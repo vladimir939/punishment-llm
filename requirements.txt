@@ -1,0 +1,13 @@
+# Harness
+anthropic>=0.70
+openai>=1.60
+google-genai>=1.0
+
+# Analysis
+pandas>=2.2
+numpy>=1.26
+statsmodels>=0.14
+matplotlib>=3.8
+
+# Tests
+pytest>=8.0

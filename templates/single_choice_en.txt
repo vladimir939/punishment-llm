@@ -1,0 +1,15 @@
+{persona_block}SITUATION:
+Two people took part in a task. Person A was given $100 and had to divide it
+between themselves and Person B. Person B had no say in the decision.
+Person A chose to keep ${a_keeps} and give ${b_gets} to Person B.
+
+You are Person B. Separately from this division, you have $50 of your own.
+
+DECISION:
+Option {opt1}: Do nothing. You keep your $50 and Person A keeps ${a_keeps}.
+Option {opt2}: Pay ${cost} of your own money to reduce Person A's payoff by
+${damage}. You would keep ${b_after} and Person A would keep ${a_after}.
+
+Answer in exactly this format and include nothing else:
+CHOICE: [X or Y]
+REASON: [one or two sentences]

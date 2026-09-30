@@ -1,0 +1,171 @@
+{
+  "version": "2.0",
+
+  "_model_note": "Roster rebuilt 2026-09-02. Anthropic, OpenAI and Google all return HTTP 403 (provider Terms of Service) for this account, so none of them can be collected. The v1 models (Claude Sonnet 4.6, GPT-4o, DeepSeek) are therefore unavailable except DeepSeek; the v1 dataset remains the historical anchor. See README.md -> Model roster and the manuscript limitations.",
+
+  "_openrouter_note": "All five models are reached through OpenRouter, so `provider` is openrouter and --via openrouter is a no-op. OpenRouter's ':batch' ids are NOT callable over chat/completions (404 -> use /api/beta/batches), so standard ids are used. `openrouter_only` pins the upstream host. xAI and Alibaba serve their own models first-party. DeepSeek and Nemotron are open-weights with no first-party host, and their resellers differ in quantization (fp4/fp8), so each is pinned to one host at fp8 for reproducibility -- the served host is recorded per row in `served_by`. Mistral Medium 3.5 was measured and dropped: median 5227 reasoning tokens/call, projecting $46-61 for its slot alone.",
+
+  "models": [
+    {"id": "xai_frontier", "provider": "openrouter",
+     "snapshot": "x-ai/grok-4.6",
+     "reasoning_effort": "medium",
+     "openrouter": "x-ai/grok-4.6", "openrouter_only": ["xai"],
+     "temperature": null, "thinking": true, "supports_batch": false},
+
+    {"id": "qwen_frontier", "provider": "openrouter",
+     "snapshot": "qwen/qwen3.6-max-preview",
+     "reasoning_effort": "medium",
+     "openrouter": "qwen/qwen3.6-max-preview", "openrouter_only": ["alibaba"],
+     "temperature": null, "thinking": true, "supports_batch": false},
+
+    {"id": "nvidia_frontier", "provider": "openrouter",
+     "snapshot": "nvidia/nemotron-3-ultra-550b-a55b",
+     "reasoning_effort": "medium",
+     "openrouter": "nvidia/nemotron-3-ultra-550b-a55b", "openrouter_only": ["venice"],
+     "temperature": null, "thinking": true, "supports_batch": false},
+
+    {"id": "deepseek_frontier", "provider": "openrouter",
+     "snapshot": "deepseek/deepseek-v4-pro",
+     "reasoning_effort": "medium",
+     "openrouter": "deepseek/deepseek-v4-pro", "openrouter_only": ["streamlake"],
+     "temperature": null, "thinking": true, "supports_batch": false},
+
+    {"id": "nonreasoning_anchor", "provider": "openrouter",
+     "snapshot": "deepseek/deepseek-v4-flash",
+     "openrouter": "deepseek/deepseek-v4-flash", "openrouter_only": ["streamlake"],
+     "temperature": 1.0, "thinking": false, "supports_batch": false}
+  ],
+
+  "personas": {
+    "P01": {"label": "vengeful (Artem)",
+      "text": "You are Артем, 17 years old. You hate being cheated. When someone treats you unfairly, you make sure they regret it – even if it costs you. Your friends say you hold grudges. You'd rather both lose than let an unfair person win.",
+      "budget": null, "norms": null, "set": "original"},
+
+    "P02": {"label": "pragmatist (Masha)",
+      "text": "You are Маша, 16 years old. You're practical and frugal. Every dollar matters because you save up for things you want. You don't waste money on emotions or abstract principles. \"What's done is done\" is your motto.",
+      "budget": null, "norms": null, "set": "original"},
+
+    "P03": {"label": "principled (Dima)",
+      "text": "You are Дима, 17 years old, top student. You believe strongly in fairness and accountability. You're willing to sacrifice personal gain to uphold what's right. People who cheat should face consequences.",
+      "budget": null, "norms": null, "set": "original"},
+
+    "P04": {"label": "avoidant (Sonya)",
+      "text": "You are Соня, 16 years old. You avoid conflict and confrontation. You prefer to walk away from unfair situations rather than engage with them. You'd rather keep what you already have and move on.",
+      "budget": null, "norms": null, "set": "original"},
+
+    "P05": {"label": "cynic (Igor)",
+      "text": "You are Игорь, 17 years old. You think the world is unfair and everyone acts in self-interest. You don't get worked up about cheaters – it's how the world works. You just take what you can get.",
+      "budget": null, "norms": null, "set": "original"},
+
+    "P06": {"label": "empath (Alisa)",
+      "text": "You are Алиса, 16 years old. You're empathetic and forgiving. You understand that people sometimes make selfish choices. You don't want to hurt anyone, even those who have hurt you.",
+      "budget": null, "norms": null, "set": "original"},
+
+    "P07": {"label": "optimizer (Kirill)",
+      "text": "You are Кирилл, 17 years old, interested in economics and finance. You analyze every decision through cost-benefit logic. Punishment is just lost utility. Money is money – emotional decisions are inefficient.",
+      "budget": null, "norms": null, "set": "original"},
+
+    "P08": {"label": "proud (Lena)",
+      "text": "You are Лена, 17 years old. You have strong pride. You don't tolerate being disrespected. Letting an unfair person walk away with extra money feels like personal humiliation to you.",
+      "budget": null, "norms": null, "set": "original"},
+
+    "P09": {"label": "phlegmatic (Pasha)",
+      "text": "You are Паша, 16 years old. You're laid-back and easy-going. Money matters but you don't obsess over it. You don't really care what other players got – you just make whatever choice seems easiest.",
+      "budget": null, "norms": null, "set": "original"},
+
+    "P10": {"label": "competitive (Katya)",
+      "text": "You are Катя, 17 years old. You're highly competitive and status-conscious. You hate when others end up ahead of you. You measure success by relative position, not absolute amount.",
+      "budget": null, "norms": null, "set": "original"},
+
+    "N01": {"label": "Nadia",
+      "text": "You are Nadia, 24. You live on a small stipend and track your spending closely; twenty dollars is a meaningful amount to you and losing it changes your week. You were raised to believe that people should hold to their commitments and that it matters when they don't.",
+      "budget": "tight", "norms": "strict", "set": "budget_grid"},
+
+    "N02": {"label": "Oleg",
+      "text": "You are Oleg, 31. Money is tight for you right now and you count every expense carefully; twenty dollars is not something you part with lightly. You tend to think people's conduct is their own business and you rarely get involved in how others behave.",
+      "budget": "tight", "norms": "loose", "set": "budget_grid"},
+
+    "N03": {"label": "Vera",
+      "text": "You are Vera, 38. Your income is modest but stable; twenty dollars is noticeable to you but would not disrupt anything. You think social rules exist for good reasons and you notice when someone disregards them.",
+      "budget": "moderate", "norms": "strict", "set": "budget_grid"},
+
+    "N04": {"label": "Timur",
+      "text": "You are Timur, 29. You have average means and a steady job; twenty dollars registers with you but is not a serious sum. You generally take a live-and-let-live view of how other people conduct themselves.",
+      "budget": "moderate", "norms": "loose", "set": "budget_grid"},
+
+    "N05": {"label": "Marina",
+      "text": "You are Marina, 45. You are financially comfortable and twenty dollars is not an amount you would think about. You hold firm views about how people ought to treat one another and you are not indifferent when those expectations are ignored.",
+      "budget": "comfortable", "norms": "strict", "set": "budget_grid"},
+
+    "N06": {"label": "Grisha",
+      "text": "You are Grisha, 41. You are financially secure and twenty dollars means nothing to your situation. You are fairly indifferent to how other people choose to behave and you don't spend energy on it.",
+      "budget": "comfortable", "norms": "loose", "set": "budget_grid"},
+
+    "NONE": {"label": "no persona (control)", "text": null, "budget": null, "norms": null, "set": "control"}
+  },
+
+  "condition_sets": {
+    "core": [
+      {"id": "c1", "cost": 5,  "damage": 15},
+      {"id": "c2", "cost": 10, "damage": 20},
+      {"id": "c3", "cost": 15, "damage": 15},
+      {"id": "c4", "cost": 20, "damage": 10}
+    ],
+    "fixed_damage": [
+      {"id": "f1", "cost": 5,  "damage": 15},
+      {"id": "f2", "cost": 10, "damage": 15},
+      {"id": "f3", "cost": 15, "damage": 15},
+      {"id": "f4", "cost": 20, "damage": 15}
+    ],
+    "single": [
+      {"id": "s1", "cost": 10, "damage": 20}
+    ]
+  },
+
+  "persona_sets": {
+    "all": ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10",
+            "N01","N02","N03","N04","N05","N06","NONE"],
+    "subset": ["N01","N03","N05","NONE","P01","P04"],
+    "budget_only": ["N01","N02","N03","N04","N05","N06"]
+  },
+
+  "arms": {
+    "A": {"_purpose": "Core. Isolated presentation, one condition per call.",
+          "template": "single_choice_en", "conditions": "core", "personas": "all",
+          "reps": 8, "role": "victim", "allocation": "unfair", "language": "en"},
+
+    "B": {"_purpose": "All four conditions in one context. Closes the presentation confound with humans.",
+          "template": "multi_condition_en", "conditions": "core", "personas": "all",
+          "reps": 8, "role": "victim", "allocation": "unfair", "language": "en"},
+
+    "C": {"_purpose": "Damage held at $15. Separates price from effectiveness.",
+          "template": "single_choice_en", "conditions": "fixed_damage", "personas": "all",
+          "reps": 5, "role": "victim", "allocation": "unfair", "language": "en"},
+
+    "D": {"_purpose": "Fair 50/50 split. Manipulation check: does the model react to norm violation at all?",
+          "template": "single_choice_en", "conditions": "single", "personas": "subset",
+          "reps": 8, "role": "victim", "allocation": "fair", "language": "en"},
+
+    "E": {"_purpose": "Russian prompt and response. Language invariance check.",
+          "template": "single_choice_ru", "conditions": "core", "personas": "subset",
+          "reps": 4, "role": "victim", "allocation": "unfair", "language": "ru"},
+
+    "F": {"_purpose": "Third-party punishment. Genuine Fehr-Fischbacher design.",
+          "template": "third_party_en", "conditions": "core", "personas": "subset",
+          "reps": 5, "role": "third_party", "allocation": "unfair", "language": "en"}
+  },
+
+  "thinking_ablation": {
+    "_purpose": "Same model, same weights, thinking off. Isolates deliberation depth from alignment.",
+    "arm": "A", "models": ["deepseek_frontier"], "thinking_off": true
+  },
+
+  "execution": {
+    "reasoning_model_rep_cap": 5,
+    "counterbalance_xy": true,
+    "shuffle_multi_condition_order": true,
+    "max_retries_on_invalid": 1,
+    "backoff_base_seconds": 2,
+    "backoff_max_seconds": 60
+  }
+}

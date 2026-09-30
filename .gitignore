@@ -1,0 +1,15 @@
+# Collected data is committed deliberately (the paper links to it), but not
+# until it is real. Uncomment the next two lines only if the repo must stay
+# private during collection.
+# data/raw.csv
+# data/humans.csv
+
+# Raw survey exports may contain Google Forms timestamps — never commit them.
+survey/responses_*.csv
+survey/_t/
+
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+data_synth/

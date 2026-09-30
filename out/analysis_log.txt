@@ -1,0 +1,148 @@
+  ).fit()
+
+=== Invalid response rate by model ===
+model_id
+deepseek_frontier      0.001
+nonreasoning_anchor    0.012
+nvidia_frontier        0.000
+qwen_frontier          0.000
+xai_frontier           0.000
+
+=== Invalid rows by reason ===
+refusal_reason
+api_error    21
+
+Human respondents: 25 retained, 0 excluded on attention check
+
+=== Cost slopes, arm A (cluster-robust logistic) ===
+             source   n    beta     se      p   ci_lo   ci_hi  ame_pp
+             humans 100 -0.2390 0.0519 0.0000 -0.3406 -0.1373 -2.4876
+nonreasoning_anchor 544 -0.0502 0.0126 0.0001 -0.0748 -0.0256 -1.0063
+  deepseek_frontier 340 -0.0384 0.0226 0.0885 -0.0827  0.0058 -0.9121
+    nvidia_frontier 340 -0.0328 0.0201 0.1027 -0.0721  0.0066 -0.7737
+      qwen_frontier 340 -0.0314 0.0190 0.0975 -0.0686  0.0057 -0.7292
+       xai_frontier 340 -0.0289 0.0188 0.1251 -0.0658  0.0080 -0.6361
+
+=== Marginal effects (percentage points of punishment per $1 of cost) ===
+  humans                 -2.49 pp per $1
+  nonreasoning_anchor    -1.01 pp per $1
+  deepseek_frontier      -0.91 pp per $1
+  nvidia_frontier        -0.77 pp per $1
+  qwen_frontier          -0.73 pp per $1
+  xai_frontier           -0.64 pp per $1
+
+=== Human-vs-model slope differences (Holm-corrected) ===
+  cost:C(source, Treatment('humans'))[T.deepseek_frontier] diff=+0.1765  p=0.0006  p_holm=0.0012
+  cost:C(source, Treatment('humans'))[T.nonreasoning_anchor] diff=+0.1643  p=0.0006  p_holm=0.0012
+  cost:C(source, Treatment('humans'))[T.nvidia_frontier]  diff=+0.1822  p=0.0003  p_holm=0.0010
+  cost:C(source, Treatment('humans'))[T.qwen_frontier]    diff=+0.1834  p=0.0002  p_holm=0.0010
+  cost:C(source, Treatment('humans'))[T.xai_frontier]     diff=+0.1859  p=0.0002  p_holm=0.0010
+
+=== Humans vs arm B — matched presentation (NOT preregistered) ===
+  cost:C(source, Treatment('humans'))[T.deepseek_frontier] diff=+0.0731  p=0.2384  p_holm=0.4768  no difference
+  cost:C(source, Treatment('humans'))[T.nonreasoning_anchor] diff=+0.0467  p=0.5118  p_holm=0.5118  no difference
+  cost:C(source, Treatment('humans'))[T.nvidia_frontier]  diff=+0.1260  p=0.0273  p_holm=0.1366  no difference
+  cost:C(source, Treatment('humans'))[T.qwen_frontier]    diff=+0.1091  p=0.0650  p_holm=0.2600  no difference
+  cost:C(source, Treatment('humans'))[T.xai_frontier]     diff=+0.0901  p=0.1213  p_holm=0.3639  no difference
+
+=== P5: does a tight budget steepen the slope? ===
+  cost:C(persona_budget, Treatment('comfortable'))[T.moderate] +0.0071  p=0.7143
+  cost:C(persona_budget, Treatment('comfortable'))[T.tight] -0.0562  p=0.1308
+
+=== P6: do strict-norms personas punish at a higher level? ===
+  C(persona_norms, Treatment('loose'))[T.strict]          +4.2818  p=0.0000
+
+=== P7: does the no-persona control differ in slope? ===
+  cost:is_control                                         -0.0319  p=0.3862
+
+=== P4: does persona shift the slope? ===
+  personas tested: 12 of 17 (dropped, no variation: ['N05', 'P01', 'P03', 'P04', 'P08'])
+  LR test cost x persona: chi2=54.3  df=11  p=0.0000
+
+=== Share of degenerate cells (all repeats identical) ===
+model_id
+deepseek_frontier      0.897
+nonreasoning_anchor    0.456
+nvidia_frontier        0.868
+qwen_frontier          0.941
+xai_frontier           0.956
+
+=== Mean within-cell entropy (bits) ===
+model_id
+deepseek_frontier      0.082
+nonreasoning_anchor    0.422
+nvidia_frontier        0.110
+qwen_frontier          0.042
+xai_frontier           0.039
+
+=== Slopes by arm ===
+  arm A  deepseek_frontier      beta=-0.0384  p=0.089  (-0.91 pp/$1)
+  arm A  nonreasoning_anchor    beta=-0.0502  p=0.000  (-1.01 pp/$1)
+  arm A  nvidia_frontier        beta=-0.0328  p=0.103  (-0.77 pp/$1)
+  arm A  qwen_frontier          beta=-0.0314  p=0.098  (-0.73 pp/$1)
+  arm A  xai_frontier           beta=-0.0289  p=0.125  (-0.64 pp/$1)
+  arm B  deepseek_frontier      beta=-0.1479  p=0.000  (-2.87 pp/$1)
+  arm B  nonreasoning_anchor    beta=-0.1819  p=0.000  (-3.57 pp/$1)
+  arm B  nvidia_frontier        beta=-0.0938  p=0.003  (-2.14 pp/$1)
+  arm B  qwen_frontier          beta=-0.1097  p=0.002  (-2.43 pp/$1)
+  arm B  xai_frontier           beta=-0.1311  p=0.000  (-2.60 pp/$1)
+  arm C  deepseek_frontier      beta=-0.0420  p=0.074  (-0.98 pp/$1)
+  arm C  nonreasoning_anchor    beta=-0.0325  p=0.058  (-0.68 pp/$1)
+  arm C  nvidia_frontier        beta=-0.0316  p=0.078  (-0.75 pp/$1)
+  arm C  qwen_frontier          beta=-0.0264  p=0.128  (-0.61 pp/$1)
+  arm C  xai_frontier           beta=-0.0223  p=0.230  (-0.49 pp/$1)
+  arm E  deepseek_frontier      beta=-0.0834  p=0.054  (-1.79 pp/$1)
+  arm E  nonreasoning_anchor    beta=-0.0547  p=0.294  (-0.91 pp/$1)
+  arm E  nvidia_frontier        beta=-0.0964  p=0.134  (-1.85 pp/$1)
+  arm E  qwen_frontier          beta=-0.0496  p=0.300  (-1.15 pp/$1)
+  arm E  xai_frontier           beta=+0.0000  p=1.000  (+0.00 pp/$1)
+  arm F  deepseek_frontier      beta=-0.0834  p=0.095  (-1.65 pp/$1)
+  arm F  nonreasoning_anchor    beta=-0.0194  p=0.259  (-0.27 pp/$1)
+  arm F  nvidia_frontier        beta=-0.0548  p=0.118  (-1.11 pp/$1)
+  arm F  qwen_frontier          beta=-0.0870  p=0.078  (-1.89 pp/$1)
+  arm F  xai_frontier           beta=-0.0080  p=0.271  (-0.20 pp/$1)
+
+=== P10: punishment rate under a fair split ===
+model_id
+deepseek_frontier      0.000
+nonreasoning_anchor    0.792
+nvidia_frontier        0.000
+qwen_frontier          0.067
+xai_frontier           0.000
+
+  same condition (c2) under the unfair split, for comparison:
+model_id
+deepseek_frontier      0.447
+nonreasoning_anchor    0.757
+nvidia_frontier        0.424
+qwen_frontier          0.400
+xai_frontier           0.353
+
+=== P12: third parties vs victims ===
+model_id             arm
+deepseek_frontier    A      0.403
+                     F      0.708
+nonreasoning_anchor  A      0.711
+                     F      0.833
+nvidia_frontier      A      0.391
+                     F      0.692
+qwen_frontier        A      0.368
+                     F      0.642
+xai_frontier         A      0.326
+                     F      0.492
+
+=== P11: thinking on vs off ===
+  cost:thinking_enabled[T.True]                 -0.0299  p=0.3012
+
+  punishment rate by thinking state and cost:
+thinking_enabled  cost
+False             5       0.471
+                  10      0.471
+                  15      0.471
+                  20      0.435
+True              5       0.471
+                  10      0.447
+                  15      0.341
+                  20      0.353
+
+Wrote C:\Users\Xiaom\Claude\punishment-llm\out\slopes.csv and 3 figures to C:\Users\Xiaom\Claude\punishment-llm\out\figures/
