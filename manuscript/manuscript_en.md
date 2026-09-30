@@ -161,7 +161,7 @@ The central comparison was re-specified after collection: the human questionnair
 
 ## Data availability
 
-Data, analysis code and the preregistration: [REPOSITORY LINK — to be added]. The personas reused here come from an earlier project archived at https://doi.org/10.17605/OSF.IO/KEZ3F.
+Data, analysis code and the preregistration: https://github.com/vladimir939/punishment-llm. The personas reused here come from an earlier project archived at https://doi.org/10.17605/OSF.IO/KEZ3F.
 
 ## Acknowledgements
 
